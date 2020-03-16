@@ -1,5 +1,6 @@
 require 'colorize'
 require_relative "save_load.rb"
+require 'json'
 include Save_load
 $word_array = []
 def get_word_array
@@ -116,19 +117,11 @@ class Game
 end
 game = Game.new
 game.game_loop
-# game.save
-# p game.load
-# p game.instance_variables
-
-# def save
-#   x = File.open("save.txt", "w+")
-#   x.write("HELLO")
-#   x.close
-# end
-# save
-#game.game_loop
-
-#show letters guessed already
+# save = File.open('save.yaml') {|f| YAML::load(f)}
+# File.open('save.yaml') {|f| YAML::load(f)}
+# save.instance_variables.each {|variable, value|puts variable }
+#     sleep 1
+# game.game_loop
 
 
 

@@ -93,21 +93,23 @@ win: |2
                                          L    L
                                          |    F
                                          `-.-'
-word: shelf
-turns: 4
+word: plate
+turns: 2
 letter_array:
-- s
-- h
-- e
+- p
 - l
-- f
+- a
+- t
+- e
 guess: save
 output:
 - _
-- _
-- _
+- l
+- a
 - _
 - _
 bad_guesses:
-- a
-- a
+- b
+- s
+- f
+- g

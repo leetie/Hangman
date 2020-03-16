@@ -7,7 +7,28 @@ module Save_load
   end
 
   def load
-    YAML::load("save.yaml")
+    # save = File.open('save.yaml') {|f| YAML::load(f)}
+    # puts save
+
+    File.open("save.yaml") do |f|
+      x = YAML::load(f)
+      self.turns = x.turns
+      self.word = x.word 
+      self.turns = x.turns
+      self.letter_array = x.letter_array
+      self.output = x.output
+      self.bad_guesses = x.bad_guesses
+      puts "GAME LOADED..."
+      sleep 1.5
+    end
+
+    # save = YAML::load(File.open("save.yaml", "r"))
+    #save.instance_variables.each do |variable, value|
+      #self.instance_variable_set(variable, save.variable)
+      # puts save.(variable)
+      # puts value
+      # sleep 1
+   # end
   end
 
   def save?
