@@ -117,11 +117,3 @@ class Game
 end
 game = Game.new
 game.game_loop
-# save = File.open('save.yaml') {|f| YAML::load(f)}
-# File.open('save.yaml') {|f| YAML::load(f)}
-# save.instance_variables.each {|variable, value|puts variable }
-#     sleep 1
-# game.game_loop
-
-
-
