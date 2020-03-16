@@ -1,0 +1,1 @@
+This project is a version of the classic "Hangman" game that implements a save/load instance method using serialization and deserialization.
