@@ -1,4 +1,6 @@
 require 'colorize'
+require_relative "save_load.rb"
+include Save_load
 $word_array = []
 def get_word_array
   File.open("dictionary.txt", "r") do |file|
@@ -17,7 +19,8 @@ def random_word(array)
 end
 
 class Game
-  attr_accessor :word, :turns
+  include Save_load
+  attr_accessor :word, :turns, :letter_array, :output, :bad_guesses, :guess
   get_word_array
   def initialize
     @lose = File.read("lose.txt")
@@ -38,10 +41,8 @@ class Game
     @guess = gets.chomp.downcase
   end
 
-  def message(first=true)
-    if first == true
-      puts "\tThe word is " + "#{@word.length} ".red + "characters long"
-    end
+  def message
+    puts "\tThe word is " + "#{@word.length} ".red + "characters long"
     puts "\tThere are " + "#{@turns.to_s.cyan}" + " wrong guesses left"
     puts "\tGuess the letter"
   end
@@ -59,6 +60,9 @@ class Game
   end
 
   def compare_guess
+    if @guess == "save" || @guess == "load"
+      return
+    end
     @letter_array.none?{|letter| letter == @guess} ? @turns -= 1 : update_output
     @letter_array.none?{|letter| letter == @guess} ? @bad_guesses << @guess : :nil
   end
@@ -87,15 +91,18 @@ class Game
 
   def game_loop
     system 'clear'
+    puts "Enter save/load at any point to save or load the game"
     until @turns == 0
       message
       p show_output.join(" ")
       p "Bad Guesses[#{@bad_guesses.join(" ")}]"
       get_guess
+      save?
+      load?
       compare_guess
       if @output.join("") == @word
         puts @win.red
-        puts "You win!! ;)"
+        puts "You win M'Lord! ;)"
         play_again?
       end
       system 'clear'
@@ -109,6 +116,17 @@ class Game
 end
 game = Game.new
 game.game_loop
+# game.save
+# p game.load
+# p game.instance_variables
+
+# def save
+#   x = File.open("save.txt", "w+")
+#   x.write("HELLO")
+#   x.close
+# end
+# save
+#game.game_loop
 
 #show letters guessed already
 
